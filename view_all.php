@@ -2,6 +2,7 @@
 require('connection.php');
 $q = "select * from customers";
 $result = mysqli_query($con, $q);
+mysqli_close($con);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +29,7 @@ $result = mysqli_query($con, $q);
     require("navbar.html") ?>
     <div>
         <h1 class="text-white text-center p-3">Customer Profiles</h1>
-        <table class="table table-dark table-striped table-border">
+        <table class="table table-dark table-striped table-border table-responsive">
             <caption class="text-white">List of Customers</caption>
             <thead>
                 <tr>

@@ -4,6 +4,8 @@ $id = $_GET['id'];
 $q = "select * from customers where id=$id";
 $result = mysqli_query($con, $q);
 $row = mysqli_fetch_array($result);
+mysqli_close($con);
+// $con . die;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,8 +47,9 @@ $row = mysqli_fetch_array($result);
                         Rs
                         <?php echo $row['amount'] ?>
                     </span></p>
-                <button class='btn btn-danger p-3'>Transfer Funds</button>
-                <button class='btn btn-success p-3'>View Transfer history</button>
+                <a class='btn btn-danger p-3' href=<?php echo "http://localhost/banking/transfer.php?sender=$row[id]&balance=$row[amount]" ?>>Transfer
+                    Funds</a>
+                <a class='btn btn-success p-3' href="">View Transfer history</a>
 
             </div>
         </div>
