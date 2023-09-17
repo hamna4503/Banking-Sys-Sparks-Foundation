@@ -1,8 +1,7 @@
 <?php
 require('connection.php');
 $sender = $_GET['sender'];
-$senderBalance = $_GET['balance'];
-// $id = 1;
+$senderbalance = $_GET['balance'];
 $q = "select * from customers where id !=$sender";
 $result = mysqli_query($con, $q);
 mysqli_close($con);
@@ -11,21 +10,7 @@ mysqli_close($con);
 <html lang="en">
 
 <head>
-    <script>
-        function BalanceCheck(senderInput, senderBalance) {
-            if (senderInput > senderBalance) {
-                alert("Insuffient Balance for transfer");
-            }
-        }
-        function Transfer(senderId, recId, senderBalance, recBalance) {
-            let modal = document.createElement('div');
-            modal.innerText = "Hello";
-            modal.style.color = "white";
-            // modal.style.zIndex = 100000;
-            document.body.append('modal');
-        }
-    </script>
-
+    <title>BankingSystem | Transfer</title>
 </head>
 
 <body>
@@ -61,10 +46,37 @@ mysqli_close($con);
                         <?php echo $row['amount'] ?>
                     </td>
                     <td>
-                        <button class="btn btn-primary btn-danger"
-                            onclick="Transfer(<?php echo $sender ?>,<?php echo $row['id'] ?>,<?php echo $senderBalance ?>,100)">Transfer</button>
+                        <a type="button" class="btn btn-success" href=<?php echo "inputAmount.php?sender=$sender&rec=$row[id]&senderBalance=$senderbalance&recBalance=$row[amount]" ?>>Transfer</a>
                     </td>
                 </tr>
+
+                <!-- sender id,rec id,to send -->
+                <!-- Starting of modal -->
+                <!-- <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog bg-dark border border-success">
+                        <div class="modal-content bg-dark">
+                            <div class="modal-header bg-dark">
+                                <h4 class="modal-title text-white">Transfer Amount Input</h4>
+                                <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST">
+                                    <div class="form-group">
+                                        <label for="transferAmount" class="text-white">Transfer Amount</label>
+                                        <input type="number" class="form-control" id="transferAmount"
+                                            aria-describedby="transferHelp" placeholder="Enter the amount">
+                                        <small id="transferHelp" class="form-text text-white text-muted">Enter the desired
+                                            transfer
+                                            amount</small>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Transfer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- End of modal -->
+
             <?php } ?>
     </div>
 

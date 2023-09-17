@@ -30,27 +30,30 @@ mysqli_close($con);
 <body>
     <?php
     require("navbar.html") ?>
-    <div class="container mt-5 mb-5 profile-container p-5 bg-dark bg-gradient">
+    <div class="container mt-5 mb-5 p-5 bg-dark bg-gradient profile-container">
         <h1 class='text-center text-white display-4 fw-bold'>
             <?php echo "Profile #" . $row['id'] ?>
         </h1>
-        <div class='profile-grid'>
-            <img class='profile-img img-thumbnail img-fluid p-0 mt-2 mr-0' src="images/PERSON1.jpg" />
-            <div class='profile-info text-white p-0 mt-2 display-7 ml-0 '>
-                <p><span>Name: </span><span>
-                        <?php echo $row['name'] ?>
-                    </span></p>
-                <p><span>Email: </span><span>
-                        <?php echo $row['email'] ?>
-                    </span></p>
-                <p><span>Balance: </span><span>
-                        Rs
-                        <?php echo $row['amount'] ?>
-                    </span></p>
-                <a class='btn btn-danger p-3' href=<?php echo "http://localhost/banking/transfer.php?sender=$row[id]&balance=$row[amount]" ?>>Transfer
-                    Funds</a>
-                <a class='btn btn-success p-3' href="">View Transfer history</a>
+        <div>
+            <div class="row">
+                <img class='profile-img img-thumbnail img-fluid p-0 mt-2 mr-0 col-lg-4 col-auto'
+                    src="images/PERSON1.jpg" />
+                <div class='text-white mt-2 h4 ml-0 col-lg-8 col-auto'>
+                    <p><span>Name: </span><span>
+                            <?php echo $row['name'] ?>
+                        </span></p>
+                    <span>
 
+                        <p><span>Email: </span><span>
+                                <?php echo $row['email'] ?>
+                            </span></p>
+                        <p><span>Balance: </span><span>
+                                Rs
+                                <?php echo $row['amount'] ?>
+                            </span></p>
+                        <a class='btn btn-danger' href=<?php echo "http://localhost/banking/transfer.php?sender=$row[id]&balance=$row[amount]" ?>>Transfer
+                            Funds</a>
+                </div>
             </div>
         </div>
     </div>
