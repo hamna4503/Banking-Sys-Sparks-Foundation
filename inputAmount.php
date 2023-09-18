@@ -5,16 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BankingSystem | Input Amount</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2KadrecUpdateF9CUG65"
-        crossorigin="anonymous">
-    <link href="app.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-        crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -27,7 +17,7 @@
                     placeholder="Enter Transfer Amount" name="transferAmount" required>
                 <small id=" transferHelp" class="form-text text-muted text-white">Amount to transfer.</small>
             </div>
-            <button type="submit" class="btn btn-success" onclick="Trans()">Proceed</button>
+            <button type="submit" class="btn btn-success">Proceed</button>
         </form>
     </div>
 </body>
@@ -35,47 +25,55 @@
 </html>
 <?php
 require('connection.php');
+// for sender
 $sender = $_GET['sender'];
-$rec = $_GET['rec'];
 $senderBalance = $_GET['senderBalance'];
+// for reciever:
+$rec = $_GET['rec'];
 $recBalance = $_GET['recBalance'];
-$transferAmount = $_POST['transferAmount'];
-// $alert=false;
 
-if ($transferAmount > $senderBalance and $alert != true) {
+$get_rec_name = "select name from customers where id=$rec";
+$rec_name_result = mysqli_query($con, $get_rec_name);
+$rec_name = (mysqli_fetch_assoc($rec_name_result))['name'];
+$transferAmount = $_POST['transferAmount'];
+
+if (($transferAmount > $senderBalance) || ($transferAmount < 0)) {
     ?>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>ERROR</strong> Insufficient balance for transfer.
+    <div class="alert alert-danger alert-dismissible show container" role="alert">
+        <strong>ERROR</strong> Wrong input OR Insufficient Balance.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <?php
 } else {
-    $senderBalance -= $transferAmount;
-    $recBalance += $transferAmount;
-    $senderUpdate = "update customers set amount=$senderBalance where id=$sender";
-    $recUpdate = "update customers set amount=$recBalance where id=$rec";
-    $senderUpdate_check = mysqli_query($con, $senderUpdate);
-    $recUpdate_check = mysqli_query($con, $recUpdate);
-    mysqli_close($con);
+    if ($transferAmount != 0) {
+        $senderBalance -= $transferAmount;
+        $recBalance += $transferAmount;
+        $senderUpdate = "update customers set amount=$senderBalance where id=$sender";
+        $recUpdate = "update customers set amount=$recBalance where id=$rec";
+        $senderUpdate_check = mysqli_query($con, $senderUpdate);
+        $recUpdate_check = mysqli_query($con, $recUpdate);
 
-    if (!($senderUpdate_check or $recUpdate_check)) {
-        ?>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>ERROR</strong> Something went wrong.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <?php
-    } else {
-        ?>
-        <div class="container">
-
-            <!-- <div class="alert alert-success" role="alert">
-                Success. Funds were transfered.Redirecting you shortly...
-            </div> -->
-
+        // checking if one of the query has failed for some reason
+        if (!($senderUpdate_check or $recUpdate_check)) {
+            ?>
+            <div class=" alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>ERROR</strong> Something went wrong.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             <?php
+        } else {
+            $history = "insert into history(sender,recieverId,recieverName,amount) values($sender,$rec,
+        '$rec_name',$transferAmount)";
+            mysqli_query($con, $history);
+            ?>
+            <div class="alert alert-success alert-dismissible fade show container" role="alert">
+                <strong>Funds Transferred.</strong> You will now be redirected in a few seconds...
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <meta http-equiv="Refresh" content="2; url='http://localhost/banking/history.php?sender=<?php echo $sender ?>'">
+            <?php
+
+        }
     }
-
 }
-
 ?>

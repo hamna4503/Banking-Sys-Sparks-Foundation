@@ -22,15 +22,15 @@
             <div class="carousel-item active">
                 <img src="images/bank.jpg" class="d-block w-100" alt="..." />
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Welcome to Banking System</h5>
+                    <h3>Welcome to Banking System</h3>
                     <p>This system is made as a task of The Sparks Foundation's Internship Program.</p>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="images/currency.jpg" class="d-block w-100" alt="heyy" />
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>What tasks can you perform?</h5>
-                    <p>Transfer funds among various users and keep their record.</p>
+                    <h2>What tasks can you perform?</h2>
+                    <p>Transfer funds among various users and view their records.</p>
                 </div>
             </div>
         </div>

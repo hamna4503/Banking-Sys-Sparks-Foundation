@@ -15,7 +15,7 @@ mysqli_close($con);
 
 <body>
     <?php require('navbar.html') ?>
-    <div>
+    <div class="container">
         <h1 class="text-white text-center p-3">Transfer List for ID#
             <?php echo $sender ?>
         </h1>

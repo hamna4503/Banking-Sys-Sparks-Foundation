@@ -14,7 +14,7 @@ mysqli_close($con);
 <body>
     <?php
     require("navbar.html") ?>
-    <div class="container-fluid">
+    <div class="container">
         <h1 class="text-white text-center p-3">Customer Profiles</h1>
         <table class="table table-dark table-striped table-border table-responsive">
             <caption class="text-white">List of Customers</caption>

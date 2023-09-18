@@ -16,15 +16,6 @@ mysqli_close($con);
     <title>
         <?php echo "BankingSystem | Profile" . $row['id'] ?>
     </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link href="app.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-        crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -37,7 +28,7 @@ mysqli_close($con);
         <div>
             <div class="row">
                 <img class='profile-img img-thumbnail img-fluid p-0 mt-2 mr-0 col-lg-4 col-auto'
-                    src="images/PERSON1.jpg" />
+                    src="images/person<?php echo $row['id'] ?>.jpg" />
                 <div class='text-white mt-2 h4 ml-0 col-lg-8 col-auto'>
                     <p><span>Name: </span><span>
                             <?php echo $row['name'] ?>
@@ -51,8 +42,9 @@ mysqli_close($con);
                                 Rs
                                 <?php echo $row['amount'] ?>
                             </span></p>
-                        <a class='btn btn-danger' href=<?php echo "http://localhost/banking/transfer.php?sender=$row[id]&balance=$row[amount]" ?>>Transfer
+                        <a class='btn btn-success m-1' href=<?php echo "http://localhost/banking/transfer.php?sender=$row[id]&balance=$row[amount]" ?>>Transfer
                             Funds</a>
+                        <a class='btn btn-danger m-1' href=<?php echo "http://localhost/banking/history.php?sender=$row[id]" ?>>View Transfer History</a>
                 </div>
             </div>
         </div>
