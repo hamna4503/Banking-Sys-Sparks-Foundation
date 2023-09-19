@@ -21,6 +21,8 @@ mysqli_close($con);
 <body>
     <?php
     require("navbar.html") ?>
+    <small><a class="text-success text-right container" href="http://localhost/banking/view_all.php">Back
+            To View All</a></small>
     <div class="container mt-5 mb-5 p-5 bg-dark bg-gradient profile-container">
         <h1 class='text-center text-white display-4 fw-bold'>
             <?php echo "Profile #" . $row['id'] ?>

@@ -11,9 +11,6 @@ body{
       object-fit: cover;
       object-position: center center;
       height:100%;
-  }
-  .footer{
-    height:20vh;
   }  
   .profile-container{
     border-radius: 20px !important;

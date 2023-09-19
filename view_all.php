@@ -15,6 +15,8 @@ mysqli_close($con);
     <?php
     require("navbar.html") ?>
     <div class="container">
+        <small><a class="text-success text-right" href="http://localhost/banking/index.php">Back
+                To Home</a></small>
         <h1 class="text-white text-center p-3">Customer Profiles</h1>
         <table class="table table-dark table-striped table-border table-responsive">
             <caption class="text-white">List of Customers</caption>

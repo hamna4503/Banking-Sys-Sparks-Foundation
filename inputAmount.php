@@ -13,8 +13,8 @@
         <form method="POST">
             <div class="form-group">
                 <label for="transferAmount" class="text-white">Transfer Amount</label>
-                <input type=" number" class="form-control" id="transferAmount" aria-describedby="transferHelp"
-                    placeholder="Enter Transfer Amount" name="transferAmount" required>
+                <input type=" number" class="form-control" id="transferAmount" name="transferAmount"
+                    aria-describedby="transferHelp" placeholder="Enter Transfer Amount" name="transferAmount" required>
                 <small id=" transferHelp" class="form-text text-muted text-white">Amount to transfer.</small>
             </div>
             <button type="submit" class="btn btn-success">Proceed</button>
